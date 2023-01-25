@@ -26,7 +26,8 @@ class camera_operator:
             for face in faces:
                 cv2.rectangle(frame, (face[0], face[1]), (face[0] + face[2], face[1] + face[3]), (0, 128, 128), 2)
 
-            cv2.imshow("{0} Face(s) Detected".format(len(faces)), frame)
+            cv2.imshow("Main Frame", frame)
+            cv2.setWindowTitle("Main Frame", "{0} Face(s) Detected".format(len(faces)))
             cv2.waitKey(int(1000 / FRAMES_PER_SECOND))
 
 

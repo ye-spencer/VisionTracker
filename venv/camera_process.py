@@ -13,10 +13,8 @@ class camera_operator:
         while (True):
             ret, frame = self.video.read()
 
-            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
             faces = self.facial_cascade.detectMultiScale(
-                gray,
+                cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY), #turn it grayscale for identification
                 scaleFactor=1.1,
                 minNeighbors=5,
                 minSize=(30, 30),
@@ -28,8 +26,8 @@ class camera_operator:
 
             cv2.imshow("Main Frame", frame)
             cv2.setWindowTitle("Main Frame", "{0} Face(s) Detected".format(len(faces)))
-            cv2.waitKey(int(1000 / FRAMES_PER_SECOND))
-
+            if (cv2.waitKey(int(1000 / FRAMES_PER_SECOND)) & 0xFF == ord('p')):
+                break
 
         self.video.release()
 
